@@ -2,7 +2,7 @@
 
 Server markdown files in Github format using Express middleware.
 
-This is a revamped version of [node-docserver](https://github.com/natesilva/node-docserver) that includes the ability to pass runtime variables into markdown files.
+*This is a revamped version of [node-docserver](https://github.com/natesilva/node-docserver) that includes the ability to pass runtime variables into markdown files.*
 
 ## Installation
 
@@ -30,9 +30,8 @@ var app = express();
 app.use(expressMd({
   dir: __dirname + '/docs', // serve markdown from docs directory
   url: '/', // serve at the root of the site
-  // replace placeholders with runtime variables {{{ message }}}
   params: {
-    message: 'Hello World!'
+    message: 'Hello World!' // replace {{{ message }}} in md files with Hello World!
   }
 }));
 
@@ -42,13 +41,13 @@ app.listen(port, function () {
 });
 ```
 
-## Mapping of URLs to Markdown files
+## Mapping URLs to Markdown files
 
 Place Markdown files with the extensions `.md` or `.mdown` in your docs directory. (You can override these file extensions; see below for details.) Organize the directory any way you like, with any number of subdirectories.
 
 Each directory can have an `index.md` (or `index.mdown`) file that will be served if the user requests the directory name.
 
-## Template Support
+## Templates
 
 A `template.html` file, if present in the same directory as a Markdown document, will be used to format that document. You can have multiple templates: `expressMd` will search parent directories up the directory tree to find the nearest `template.html` and use that.
 
@@ -64,11 +63,11 @@ In `template.html`, the text `{{{ title }}}` will be replaced by the current doc
 
 In `template.html`, the text `{{{ markdown }}}` will be replaced by the HTML that was rendered from the Markdown document.
 
-### {{{ paramName }}}
+#### {{{ paramName }}}
 
 Passing a `params` object as an option, allows you to inject runtime variables into both the HTML template and markdown files.
 
-### Example template
+#### Template example
 
 ```html
 <html>
@@ -101,7 +100,7 @@ docs/
 
 ## Example URLs
 
-Given the “Using Express” example code and the directory structure shown above, a request for `http://localhost:3000/` would return `docs/index.md` (converted to HTML, of course).
+Given the directory structure shown above, a request for `http://localhost:3000/` would return `docs/index.md` (converted to HTML, of course).
 
 File extensions are handled automatically. In this example, the README file can be requested as `http://localhost:3000/README` or `http://localhost:3000/README.md`.
 
@@ -123,15 +122,15 @@ The file `docs/api/v1.0/index.md` is in a directory that does not have a templat
 
 Returns the `expressMd` middleware.
 
-### Options when creating an instance of the expressMd middleware
+#### Options when creating an instance of the expressMd middleware
 
-#### dir
+##### dir
 
 The directory where your Markdown documents are located.
 
 example: `{ dir: __dirname + '/docs' }`
 
-#### url
+##### url
 
 The URL from which your documents should be served.
 
@@ -139,7 +138,7 @@ example (`expressMd` handles the root level of the web site): `{ url: '/' }`
 
 example (`docsever` handles URLs under `/docs`): `{ url: '/docs/' }`
 
-#### extensions
+##### extensions
 
 Markdown files with these extensons will be served.
 
@@ -147,7 +146,7 @@ example: `{extensions: ['.markdown', '.md']}`
 
 > Defaults to `['.md', '.mdown']`
 
-#### passthrough
+##### passthrough
 
 Files with these extensions will be served as-is. This allows you to place non-Markdown files, such as CSS, images, and other assets, side-by-side with your Markdown documents.
 
@@ -155,27 +154,23 @@ example: `{passthrough: ['.css', '.js', '.png', '.txt']}`
 
 > Defaults to `['.css', '.png', '.jpg', '.jpeg', '.js']`
 
-#### headers
+##### headers
 
 Add additional HTTP headers to the output.
 
 example: `{headers: {'Cache-Control': 'public,max-age=3600'}}`
 
-#### cache
+##### cache
 
-Override the caching subsystem. The default uses an in-memory cache.
-
-To disable caching, set this to `false`. (You must use `false`. “Falsy” values like `0` or `undefined` will not work.)
+Override the caching subsystem. The default uses an in-memory cache. To disable caching, set this to `false`. (You must use `false`. “Falsy” values like `0` or `undefined` will not work.)
 
 No other subsystems are provided, but there is an example using Redis in the `examples` subdirectory.
 
 example: `{cache: YourCacheClass}`
 
-#### watch
+##### watch
 
-If `true`, `expressMd` will watch your documents `dir` for changes. If any files are added, removed, or changed, the cache will be flushed.
-
-This means you do not have to restart the server if you change any of your documents or templates.
+If `true`, `expressMd` will watch your documents `dir` for changes. If any files are added, removed, or changed, the cache will be flushed. This means you do not have to restart the server if you change any of your documents or templates.
 
 This feature is experimental and **off** by default.
 
@@ -233,3 +228,7 @@ If you enable the experimental `watch` option, the cache is emptied every time a
 ## Credit where credit's due
 
 The bulk of this code was written by [@natesilva](https://github.com/natesilva).
+
+## License
+
+Licensed under [MIT License](LICENSE)
