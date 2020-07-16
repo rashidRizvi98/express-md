@@ -1,8 +1,6 @@
 # express-md
 
-Server markdown files in Github format using Express middleware.
-
-*This is a revamped version of [node-docserver](https://github.com/natesilva/node-docserver) that includes the ability to pass runtime variables into markdown files.*
+Server markdown files in the beautifully clean Github look and feel using Express middleware.
 
 ## Installation
 
@@ -18,7 +16,7 @@ npm install express-md --save
 * Can handle requests for an entire site, or just one subdirectory of a site.
 * Pass runtime variables into Markdown files
 
-## Example
+## Usage
 
 ``` js
 var express = require('express');
@@ -27,13 +25,22 @@ var port = 3000;
 
 var app = express();
 
-app.use(expressMd({
-  dir: __dirname + '/docs', // serve markdown from docs directory
-  url: '/', // serve at the root of the site
+// create an instance of express-md with custom options
+var mdRouter = expressMd({
+  // serve markdown files from `docs` directory
+  dir: __dirname + '/docs',
+  // serve requests from root of the site
+  url: '/',
+  // ignore the following requests
+  ignore: ['/users', '/products'],
+  // variables to be used within markdown files
   params: {
-    message: 'Hello World!' // replace {{{ message }}} in md files with Hello World!
+    // variable below replaces {{{ message }}} in md files with Hello World!
+    message: 'Hello World!'
   }
-}));
+});
+
+app.use(mdRouter);
 
 // start the server
 app.listen(port, function () {
@@ -231,7 +238,7 @@ If you enable the experimental `watch` option, the cache is emptied every time a
 
 ## Credit where credit's due
 
-The bulk of this code was written by [@natesilva](https://github.com/natesilva).
+The bulk of this code was written by [@natesilva](https://github.com/natesilva) as part of the [node-docserver](https://github.com/natesilva/node-docserver) project.
 
 ## License
 
