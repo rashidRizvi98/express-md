@@ -16,7 +16,7 @@ var watch = require('./lib/watch.js');
 function expressMd(options) {
 
     // get our version number
-    var packageJsonPath = path.join(__dirname, '..', 'package.json');
+    var packageJsonPath = path.join(__dirname, 'package.json');
     var packageJson = JSON.parse(fs.readFileSync(packageJsonPath));
     var version = packageJson.name + ' ' + packageJson.version;
 
