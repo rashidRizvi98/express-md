@@ -58,17 +58,17 @@ app.listen(port, function () {
 
 You can configure express-md use the following options:
 
-Option        | Description                                                                   | Example                                                 | Default value
-------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------
-`dir`         | The directory where your Markdown documents are located                       | `{ dir: __dirname + '/docs' }`                          |
-`url`         | The URL from which your documents should be served                            | `{ url: '/docs' }`                                      |
-`extensions`  | Markdown files with these extensions will be served                           | `{ extensions: ['.markdown', '.md'] }`                  | `['.md', '.mdown']`
-`passthrough` | Files with these extensions will be served as-is                              | `{ passthrough: ['.css', '.js', '.png', '.txt'] }`      | `['.css', '.png', '.jpg', '.jpeg', '.js']`
-`headers`     | Add additional HTTP headers to the output                                     | `{ headers: {'Cache-Control': 'public,max-age=3600'} }` |
-`cache`       | Override the caching subsystem. To disable caching, set this to `false`       | `{ cache: YourCacheClass }`                             | *in-memory cache*
-`watch`       | If `true`, `express-md` will watch your documents `dir` for changes           | `{ watch: true }`                                       | `{watch: false}`
-`ignore`      | Array of request paths to ignore | `ignore: ['/users', '/stock']`             |                                                         |
-`params`      | Variables used to replace *(replaces {{{ vairableName }}})* in markdown files |                                                         |
+Option        | Description                                                             | Example                                    | Default
+------------- | ----------------------------------------------------------------------- | ------------------------------------------ | ------------------------------------------
+`dir`         | Directory where markdown files are located                              | `__dirname + '/docs'`                      |
+`url`         | URL from which markdown files should be served                          | `/docs`                                    |
+`extensions`  | Markdown files with these extensions will be served                     | `['.markdown', '.md']`                     | `['.md', '.mdown']`
+`passthrough` | Files with these extensions will be served as-is                        | `['.css', '.js', '.png', '.txt']`          | `['.css', '.png', '.jpg', '.jpeg', '.js']`
+`headers`     | Add additional HTTP headers                                             | `{'Cache-Control': 'public,max-age=3600'}` |
+`cache`       | Override the caching subsystem. To disable caching, set this to `false` | `YourCacheClass`                           | *in-memory cache*
+`watch`       | Automatically reload files changes in `dir`                             | `true`                                     | `false`
+`ignore`      | Request paths to ignore | `ignore: ['/users', '/stock']`                |                                            |
+`params`      | Variables to replace `replaces {{{ variableName }}}` in markdown files  |                                            |
 
 ### Mapping URLs to Markdown files
 
