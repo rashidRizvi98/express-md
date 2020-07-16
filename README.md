@@ -176,6 +176,10 @@ This feature is experimental and **off** by default.
 
 example: `{watch: true}`
 
+##### ignore
+
+Pass an array of request paths paths to, such as `ignore: ['/users', '/stock']`
+
 > Defaults to `false`
 
 ## Error Documents

@@ -24,6 +24,7 @@ function expressMd(options) {
     options = options || {};
     options.dir = options.dir || 'docs';
     options.url = options.url || '/docs/';
+    options.ignore = options.ignore || [];
     options.params = options.params || {};
     options.extensions = options.extensions || ['.md', '.mdown'];
     options.passthrough = options.passthrough || ['.css', '.png', '.jpg', '.jpeg', '.js'];
@@ -68,6 +69,11 @@ function expressMd(options) {
         var pathname = decodeURI(url.parse(req.url).pathname);
         if (pathname.slice(0, options.url.length) !== options.url) {
             // request is outside our URL base
+            return next();
+        }
+
+        if (options.ignore.indexOf(pathname) >= 0) {
+            // ignore this request
             return next();
         }
 
