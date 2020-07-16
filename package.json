@@ -1,6 +1,6 @@
 {
   "name": "express-md",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "Express middleware to serve markdown files, Github style",
   "homepage": "https://github.com/orca-scan/express-md",
   "keywords": [
