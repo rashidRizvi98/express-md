@@ -2,12 +2,6 @@
 
 Server markdown files in the beautifully clean Github look and feel using Express middleware.
 
-## Installation
-
-```bash
-npm install express-md --save
-```
-
 ## Features
 
 * Handles Github-Flavored Markdown, using the `marked` package.
@@ -15,6 +9,12 @@ npm install express-md --save
 * In-memory caching that can easily be replaced by a custom cache module (e.g., Redis)
 * Can handle requests for an entire site, or just one subdirectory of a site.
 * Pass runtime variables into Markdown files
+
+## Installation
+
+```bash
+npm install express-md --save
+```
 
 ## Usage
 
