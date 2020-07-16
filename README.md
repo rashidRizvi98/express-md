@@ -161,7 +161,7 @@ var middleware = expressMd({
 });
 ```
 
-### Q: I updated one of my Markdown documents, but `express-md` is still showing the old version.
+### Q: I updated one of my markdown docs, but is still showing the old version
 
 The old version of the document is cached, either by `express-md` or by your web browser.
 
