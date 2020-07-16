@@ -18,7 +18,7 @@ npm install express-md --save
 * Can handle requests for an entire site, or just one subdirectory of a site.
 * Pass runtime variables into Markdown files
 
-## Quick Example
+## Example
 
 ``` js
 var express = require('express');
@@ -41,13 +41,13 @@ app.listen(port, function () {
 });
 ```
 
-## Mapping URLs to Markdown files
+### Mapping URLs to Markdown files
 
 Place Markdown files with the extensions `.md` or `.mdown` in your docs directory. (You can override these file extensions; see below for details.) Organize the directory any way you like, with any number of subdirectories.
 
 Each directory can have an `index.md` (or `index.mdown`) file that will be served if the user requests the directory name.
 
-## Templates
+### Templates
 
 A `template.html` file, if present in the same directory as a Markdown document, will be used to format that document. You can have multiple templates: `expressMd` will search parent directories up the directory tree to find the nearest `template.html` and use that.
 
@@ -82,7 +82,7 @@ Passing a `params` object as an option, allows you to inject runtime variables i
 </html>
 ```
 
-## Directory Structure Example
+#### Directory Structure Example
 
 For this example, assume the following directory structure:
 
@@ -98,7 +98,7 @@ docs/
         └── index.md
 ```
 
-## Example URLs
+#### Example URLs
 
 Given the directory structure shown above, a request for `http://localhost:3000/` would return `docs/index.md` (converted to HTML, of course).
 
@@ -106,7 +106,7 @@ File extensions are handled automatically. In this example, the README file can 
 
 Likewise, the `api/index.md` file can be requested as `http://localhost:3000/api/`, `http://localhost:3000/api/index.md`, or even `http://localhost:3000/api/index`.
 
-## Example Templates
+#### Example Templates
 
 The file `docs/index.md` is served using the template file `docs/template.html`.
 
@@ -122,7 +122,7 @@ The file `docs/api/v1.0/index.md` is in a directory that does not have a templat
 
 Returns the `expressMd` middleware.
 
-#### Options when creating an instance of the expressMd middleware
+#### Options
 
 ##### dir
 
