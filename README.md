@@ -27,17 +27,12 @@ var app = express();
 
 // create an instance of express-md with custom options
 var mdRouter = expressMd({
-  // set HTTP headers
-  headers: {'Cache-Control': 'public,max-age=3600'},
 
   // serve markdown files from `docs` directory
   dir: __dirname + '/docs',
 
   // serve requests from root of the site
-  url: '/',
-
-  // ignore the following requests
-  ignore: ['/users', '/products'],
+  url: '/docs',
 
   // variables to be used within markdown files
   params: {
