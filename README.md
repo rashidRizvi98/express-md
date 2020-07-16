@@ -27,12 +27,18 @@ var app = express();
 
 // create an instance of express-md with custom options
 var mdRouter = expressMd({
+  // set HTTP headers
+  headers: {'Cache-Control': 'public,max-age=3600'},
+
   // serve markdown files from `docs` directory
   dir: __dirname + '/docs',
+
   // serve requests from root of the site
   url: '/',
+
   // ignore the following requests
   ignore: ['/users', '/products'],
+
   // variables to be used within markdown files
   params: {
     // variable below replaces {{{ message }}} in md files with Hello World!
@@ -48,6 +54,22 @@ app.listen(port, function () {
 });
 ```
 
+## express-md options
+
+You can configure express-md use the following options:
+
+Option        | Description                                                                   | Example                                                 | Default value
+------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------
+`dir`         | The directory where your Markdown documents are located                       | `{ dir: __dirname + '/docs' }`                          |
+`url`         | The URL from which your documents should be served                            | `{ url: '/docs' }`                                      |
+`extensions`  | Markdown files with these extensions will be served                           | `{ extensions: ['.markdown', '.md'] }`                  | `['.md', '.mdown']`
+`passthrough` | Files with these extensions will be served as-is                              | `{ passthrough: ['.css', '.js', '.png', '.txt'] }`      | `['.css', '.png', '.jpg', '.jpeg', '.js']`
+`headers`     | Add additional HTTP headers to the output                                     | `{ headers: {'Cache-Control': 'public,max-age=3600'} }` |
+`cache`       | Override the caching subsystem. To disable caching, set this to `false`       | `{ cache: YourCacheClass }`                             | *in-memory cache*
+`watch`       | If `true`, `express-md` will watch your documents `dir` for changes           | `{ watch: true }`                                       | `{watch: false}`
+`ignore`      | Array of request paths to ignore | `ignore: ['/users', '/stock']`             |                                                         |
+`params`      | Variables used to replace *(replaces {{{ vairableName }}})* in markdown files |                                                         |
+
 ### Mapping URLs to Markdown files
 
 Place Markdown files with the extensions `.md` or `.mdown` in your docs directory. (You can override these file extensions; see below for details.) Organize the directory any way you like, with any number of subdirectories.
@@ -56,7 +78,7 @@ Each directory can have an `index.md` (or `index.mdown`) file that will be serve
 
 ### Templates
 
-A `template.html` file, if present in the same directory as a Markdown document, will be used to format that document. You can have multiple templates: `expressMd` will search parent directories up the directory tree to find the nearest `template.html` and use that.
+A `template.html` file, if present in the same directory as a Markdown document, will be used to format that document. You can have multiple templates: `express-md` will search parent directories up the directory tree to find the nearest `template.html` and use that.
 
 This allows you to have a default template, and override with custom templates in each subdirectory.
 
@@ -119,83 +141,17 @@ The file `docs/index.md` is served using the template file `docs/template.html`.
 
 The file `docs/api/index.md` would be served using the template file `docs/api/template.html`.
 
-The file `docs/api/v1.0/index.md` is in a directory that does not have a template file. In this case, `expressMd` will search up the directory tree until it finds a template. This file would be served using the template file `docs/api/template.html`.
+The file `docs/api/v1.0/index.md` is in a directory that does not have a template file. In this case, `express-md` will search up the directory tree until it finds a template. This file would be served using the template file `docs/api/template.html`.
 
-(If `expressMd` can find no template for a document, it will be served as a bare-bones HTML file.)
-
-## API
-
-### expressMd(options)
-
-Returns the `expressMd` middleware.
-
-#### Options
-
-##### dir
-
-The directory where your Markdown documents are located.
-
-example: `{ dir: __dirname + '/docs' }`
-
-##### url
-
-The URL from which your documents should be served.
-
-example (`expressMd` handles the root level of the web site): `{ url: '/' }`
-
-example (`docsever` handles URLs under `/docs`): `{ url: '/docs/' }`
-
-##### extensions
-
-Markdown files with these extensons will be served.
-
-example: `{extensions: ['.markdown', '.md']}`
-
-> Defaults to `['.md', '.mdown']`
-
-##### passthrough
-
-Files with these extensions will be served as-is. This allows you to place non-Markdown files, such as CSS, images, and other assets, side-by-side with your Markdown documents.
-
-example: `{passthrough: ['.css', '.js', '.png', '.txt']}`
-
-> Defaults to `['.css', '.png', '.jpg', '.jpeg', '.js']`
-
-##### headers
-
-Add additional HTTP headers to the output.
-
-example: `{headers: {'Cache-Control': 'public,max-age=3600'}}`
-
-##### cache
-
-Override the caching subsystem. The default uses an in-memory cache. To disable caching, set this to `false`. (You must use `false`. “Falsy” values like `0` or `undefined` will not work.)
-
-No other subsystems are provided, but there is an example using Redis in the `examples` subdirectory.
-
-example: `{cache: YourCacheClass}`
-
-##### watch
-
-If `true`, `expressMd` will watch your documents `dir` for changes. If any files are added, removed, or changed, the cache will be flushed. This means you do not have to restart the server if you change any of your documents or templates.
-
-This feature is experimental and **off** by default.
-
-example: `{watch: true}`
-
-##### ignore
-
-Pass an array of request paths paths to, such as `ignore: ['/users', '/stock']`
-
-> Defaults to `false`
+(If `express-md` can find no template for a document, it will be served as a bare-bones HTML file.)
 
 ## Error Documents
 
-When an HTTP error occurs, `expressMd` will look for a document matching the error number, using the same logic that is used to find templates. Currently only `404` errors are supported this way.
+When an HTTP error occurs, `express-md` will look for a document matching the error number, using the same logic that is used to find templates. Currently only `404` errors are supported this way.
 
 For example, to have a custom `404` error page, create a `404.md` file. It will be converted to HTML and served using `template.html` just like any other Markdown file would be.
 
-Like templates, you can have custom `404.md` error documents in each subdirectory and `expressMd` will use the nearest one when serving an error.
+Like templates, you can have custom `404.md` error documents in each subdirectory and `express-md` will use the nearest one when serving an error.
 
 ## FAQ
 
@@ -210,27 +166,27 @@ var middleware = expressMd({
 });
 ```
 
-### Q: I updated one of my Markdown documents, but `expressMd` is still showing the old version.
+### Q: I updated one of my Markdown documents, but `express-md` is still showing the old version.
 
-The old version of the document is cached, either by `expressMd` or by your web browser.
+The old version of the document is cached, either by `express-md` or by your web browser.
 
 If you used a `Cache-Control` header, the document may be cached by your web browser. Hit <kbd>F5</kbd> (or <kbd>Cmd-R</kbd>, or <kbd>Ctrl-R</kbd>) a couple of times to refresh.
 
-If you still see the old document, then it’s been cached by `expressMd`. Your options are:
+If you still see the old document, then it’s been cached by `express-md`. Your options are:
 
-* restart `expressMd`
+* restart `express-md`
 * or, disable server-side caching by passing `false` as the `cache` option
-* or, use the experimental `watch` option so that `expressMd` will automatically notice any changes
+* or, use the experimental `watch` option so that `express-md` will automatically notice any changes
 
 ### Q: How does the cache work ?
 
-`expressMd` aggressively caches the rendered, HTML form of your documents.
+`express-md` aggressively caches the rendered, HTML form of your documents.
 
-The first time a document is requested, `expressMd` has to read it from disk (along with any template) and render it to HTML. On subsequent requests for the same document, it will be served from cache, which should be extremely fast.
+The first time a document is requested, `express-md` has to read it from disk (along with any template) and render it to HTML. On subsequent requests for the same document, it will be served from cache, which should be extremely fast.
 
-In addition, requests that result in a `404` error are cached, so once `expressMd` searches for a document and doesn’t find it, it won’t waste time looking for that document again.
+In addition, requests that result in a `404` error are cached, so once `express-md` searches for a document and doesn’t find it, it won’t waste time looking for that document again.
 
-By default, once a document is cached, `expressMd` will never re-read that document; the cached version will always be served until you reload the server.
+By default, once a document is cached, `express-md` will never re-read that document; the cached version will always be served until you reload the server.
 
 You also have the option to disable caching by passing `false` as the `cache` option.
 
