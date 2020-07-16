@@ -34,9 +34,8 @@ var mdRouter = expressMd({
   // serve requests from root of the site
   url: '/docs',
 
-  // variables to be used within markdown files
-  params: {
-    // variable below replaces {{{ message }}} in md files with Hello World!
+  // variables to replace {{{ varName }}} in markdown files
+  vars: {
     message: 'Hello World!'
   }
 });
@@ -63,7 +62,7 @@ Option        | Description                                                     
 `cache`       | Override the caching subsystem. To disable caching, set this to `false` | *in-memory cache*
 `watch`       | Automatically reload files changes in `dir`                             | `false`
 `ignore`      | Request paths to ignore | `ignore: ['/users', '/stock']`                |
-`params`      | Variables to replace `replaces {{{ variableName }}}` in markdown files  |
+`vars`        | Variables to replace `{{{ variableName }}}` in markdown files           |
 
 ### Mapping URLs to Markdown files
 

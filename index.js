@@ -25,7 +25,7 @@ function expressMd(options) {
     options.dir = options.dir || 'docs';
     options.url = options.url || '/docs/';
     options.ignore = options.ignore || [];
-    options.params = options.params || {};
+    options.vars = options.vars || {};
     options.extensions = options.extensions || ['.md', '.mdown'];
     options.passthrough = options.passthrough || ['.css', '.png', '.jpg', '.jpeg', '.js'];
     options.watch = options.watch || false;
@@ -109,7 +109,7 @@ function expressMd(options) {
                 if (err) return next(err);
 
                 if (filename) {
-                    render(filename, options.dir, options.params, function (err, html) {
+                    render(filename, options.dir, options.vars, function (err, html) {
 
                         if (err) return next(err);
 
