@@ -74,12 +74,12 @@ function expressMd(options) {
 
         // ignore can be string or regex
         var shouldIgnore = options.ignore.filter(function(item) {
-            if (typeof item === 'string') {
-                return pathname.endsWith(item);
-            }
-            else if (item instanceof RegExp) {
+
+            if (item instanceof RegExp) {
                 return item.test(pathname);
             }
+
+            return pathname.endsWith(item);
         }).length > 0;
 
         // skip this request?
@@ -90,6 +90,9 @@ function expressMd(options) {
             res.writeHead(405, Object.assign({}, defaultHeaders, { Allow: 'GET, HEAD' }));
             return res.end();
         }
+
+        // make querystring vars available to markdown
+        var markdownVars = Object.assign({}, options.vars, req.query || {});
 
         // map the URL to a filesystem path
         var target = path.join(options.dir, pathname.slice(options.url.length));
@@ -117,7 +120,7 @@ function expressMd(options) {
                 if (err) return next(err);
 
                 if (filename) {
-                    render(filename, options.dir, options.vars, function (err, html) {
+                    render(filename, options.dir, markdownVars, function (err, html) {
 
                         if (err) return next(err);
 
