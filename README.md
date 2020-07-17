@@ -61,7 +61,7 @@ Option        | Description                                                     
 `headers`     | Add additional HTTP headers                                             |
 `cache`       | Override the caching subsystem. To disable caching, set this to `false` | *in-memory cache*
 `watch`       | Automatically reload files changes in `dir`                             | `false`
-`ignore`      | Request paths to ignore | `ignore: ['/users', '/stock']`                |
+`ignore`      | Request paths to ignore *(supports strings and RegExp)*                 |
 `vars`        | Variables to replace `{{{ variableName }}}` in markdown files           |
 
 ### Mapping URLs to Markdown files

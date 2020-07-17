@@ -72,10 +72,18 @@ function expressMd(options) {
             return next();
         }
 
-        if (options.ignore.indexOf(pathname) >= 0) {
-            // ignore this request
-            return next();
-        }
+        // ignore can be string or regex
+        var shouldIgnore = options.ignore.filter(function(item) {
+            if (typeof item === 'string') {
+                return pathname.endsWith(item);
+            }
+            else if (item instanceof RegExp) {
+                return item.test(pathname);
+            }
+        }).length > 0;
+
+        // skip this request?
+        if (shouldIgnore) return next();
 
         // only GET and HEAD requests are allowed
         if (req.method !== 'GET' && req.method !== 'HEAD') {
