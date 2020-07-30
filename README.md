@@ -9,7 +9,7 @@ Server markdown files in the beautifully clean Github look and feel using Expres
 * Handles Github-Flavored Markdown, using the `marked` package
 * Per-directory template support
 * In-memory caching
-* Can handle requests for an entire site, or just one subdirectory of a site
+* Can handle requests for an entire site, or just a subdirectory
 * Pass runtime variables into Markdown files
 
 ## Installation
