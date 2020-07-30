@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/orca-scan/express-md.svg?branch=master)](https://travis-ci.org/orca-scan/express-md) [![npm](https://img.shields.io/npm/dt/express-md.svg)](https://www.npmjs.com/package/express-md)
 
-Server markdown files in the beautifully clean Github look and feel using Express middleware.
+Express middleware that serves markdown (`.md` or `.mdown`) files as HTML.
 
 ## Features
 
@@ -11,6 +11,7 @@ Server markdown files in the beautifully clean Github look and feel using Expres
 * In-memory caching
 * Can handle requests for an entire site, or just a subdirectory
 * Pass runtime variables into Markdown files
+* Defaults to beautifully clean Github look & feel if no template provided
 
 ## Installation
 
