@@ -1,13 +1,15 @@
 # express-md
 
+[![Build Status](https://travis-ci.org/orca-scan/express-md.svg?branch=master)](https://travis-ci.org/orca-scan/express-md) [![npm](https://img.shields.io/npm/dt/express-md.svg)](https://www.npmjs.com/package/express-md)
+
 Server markdown files in the beautifully clean Github look and feel using Express middleware.
 
 ## Features
 
-* Handles Github-Flavored Markdown, using the `marked` package.
-* Per-directory template support.
-* In-memory caching that can easily be replaced by a custom cache module (e.g., Redis)
-* Can handle requests for an entire site, or just one subdirectory of a site.
+* Handles Github-Flavored Markdown, using the `marked` package
+* Per-directory template support
+* In-memory caching
+* Can handle requests for an entire site, or just one subdirectory of a site
 * Pass runtime variables into Markdown files
 
 ## Installation
@@ -53,7 +55,7 @@ app.listen(port, function () {
 You can configure express-md use the following options:
 
 Option        | Description                                                             | Default
-------------- | ----------------------------------------------------------------------- | -----------------------------------------
+:-------------|:------------------------------------------------------------------------|:-----------------------------
 `dir`         | Directory where markdown files are located                              |
 `url`         | URL from which markdown files should be served                          |
 `extensions`  | Markdown files with these extensions will be served                     | `['.md', '.mdown']`
@@ -90,7 +92,11 @@ In `template.html`, the text `{{{ markdown }}}` will be replaced by the HTML tha
 
 Passing a `params` object as an option, allows you to inject runtime variables into both the HTML template and markdown files.
 
-#### Template example
+##### Example
+
+Here is a quick example of how `express-md` resolves templates.
+
+###### Template
 
 ```html
 <html>
@@ -105,7 +111,7 @@ Passing a `params` object as an option, allows you to inject runtime variables i
 </html>
 ```
 
-#### Directory Structure Example
+###### Directory structure
 
 For this example, assume the following directory structure:
 
@@ -121,23 +127,19 @@ docs/
         └── index.md
 ```
 
-#### Example URLs
+The file `docs/index.md` is served using the template file `docs/template.html`.
+
+The file `docs/api/index.md` would be served using the template file `docs/api/template.html`.
+
+The file `docs/api/v1.0/index.md` is in a directory that does not have a template file. In this case, `express-md` will search up the directory tree until it finds a template. This file would be served using the template file `docs/api/template.html`. If `express-md` is unable to find a template, it will be served as a bare-bones HTML file which is styled to match Github readme.
+
+###### URLs
 
 Given the directory structure shown above, a request for `http://localhost:3000/` would return `docs/index.md` (converted to HTML, of course).
 
 File extensions are handled automatically. In this example, the README file can be requested as `http://localhost:3000/README` or `http://localhost:3000/README.md`.
 
 Likewise, the `api/index.md` file can be requested as `http://localhost:3000/api/`, `http://localhost:3000/api/index.md`, or even `http://localhost:3000/api/index`.
-
-#### Example Templates
-
-The file `docs/index.md` is served using the template file `docs/template.html`.
-
-The file `docs/api/index.md` would be served using the template file `docs/api/template.html`.
-
-The file `docs/api/v1.0/index.md` is in a directory that does not have a template file. In this case, `express-md` will search up the directory tree until it finds a template. This file would be served using the template file `docs/api/template.html`.
-
-(If `express-md` can find no template for a document, it will be served as a bare-bones HTML file.)
 
 ## Error Documents
 
@@ -170,7 +172,7 @@ If you still see the old document, then it’s been cached by `express-md`. Your
 * disable server-side caching by passing `false` as the `cache` option
 * use the `watch` to force `express-md` to automatically notice any changes
 
-### Q: How does the cache work ?
+### Q: How does the cache work?
 
 `express-md` aggressively caches the rendered, HTML form of your documents. The first time a document is requested, `express-md` has to read it from disk (along with any template) and render it to HTML. On subsequent requests for the same document, it will be served from cache, which should be extremely fast. In addition, requests that result in a `404` error are cached, so once `express-md` searches for a document and doesn’t find it, it won’t waste time looking for that document again.
 
@@ -178,9 +180,9 @@ By default, once a document is cached, `express-md` will never re-read that docu
 
 If you enable the experimental `watch` option, the cache is emptied every time a change is detected in your `docs` directory or any of its subdirectories. Because it may be resource-intensive, this option is turned off by default. Enabling it when you have a large set of documents or subdirectories may exhaust available file handles. If you only have a few documents or subdirectories, feel free to try it out. Contributions to improve this feature are welcome.
 
-## Credit where credit's due
+## Credit where it's due
 
-The bulk of this code was written by [@natesilva](https://github.com/natesilva) as part of the [node-docserver](https://github.com/natesilva/node-docserver) project.
+This a refactor of the [node-docserver](https://github.com/natesilva/node-docserver) project.
 
 ## License
 
