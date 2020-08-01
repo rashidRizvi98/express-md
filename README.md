@@ -10,7 +10,7 @@ Express middleware that serves markdown (`.md` or `.mdown`) files as HTML.
 * Per-directory template support
 * In-memory caching
 * Handle requests for an entire site, or just a subdirectory
-* Variables can be passed in use [font-matter](https://jekyllrb.com/docs/front-matter/) or server side `vars` option
+* Pass variables to HTML templates using [font-matter](https://jekyllrb.com/docs/front-matter/) or server side `vars`
 * Defaults to beautifully clean Github look & feel if no template provided
 
 ## Installation
@@ -91,8 +91,8 @@ You can specify placeholders in your HTML template using `{{{ variableName }}}` 
 
 ```yaml
 ---
-layout: post
-title: Blogging Like a Hacker
+title: Barcode Scanner App
+description: Orca Scan is a mobile barcode scanning app ...
 ---
 ```
 
