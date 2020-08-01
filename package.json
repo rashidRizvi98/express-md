@@ -1,6 +1,6 @@
 {
   "name": "express-md",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Express middleware to serve markdown files as HTML",
   "homepage": "https://github.com/orca-scan/express-md",
   "keywords": [
@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "async": "~0.1.22",
-    "cheerio": "^1.0.0-rc.3",
+    "js-yaml": "^3.14.0",
     "marked": "^1.1.1",
     "mime": "^2.4.6"
   },

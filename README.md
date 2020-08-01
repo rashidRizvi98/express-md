@@ -6,11 +6,11 @@ Express middleware that serves markdown (`.md` or `.mdown`) files as HTML.
 
 ## Features
 
-* Handles Github-Flavored Markdown, using the `marked` package
+* Handles Github-Flavored Markdown
 * Per-directory template support
 * In-memory caching
-* Can handle requests for an entire site, or just a subdirectory
-* Pass runtime variables into Markdown files
+* Handle requests for an entire site, or just a subdirectory
+* Variables can be passed in use [font-matter](https://jekyllrb.com/docs/front-matter/) or server side `vars` option
 * Defaults to beautifully clean Github look & feel if no template provided
 
 ## Installation
@@ -81,17 +81,20 @@ This allows you to have a default template, and override with custom templates i
 
 ### Template syntax
 
-#### {{{ title }}}
-
-In `template.html`, the text `{{{ title }}}` will be replaced by the current document’s title. The title is guessed by taking the contents of the first non-empty HTML tag from the rendered HTML. In other words, since most people usually start their Markdown documents with an &lt;h1&gt; tag, that tag’s contents become the title.
-
 #### {{{ markdown }}}
 
 In `template.html`, the text `{{{ markdown }}}` will be replaced by the HTML that was rendered from the Markdown document.
 
-#### {{{ paramName }}}
+#### {{{ variableName }}}
 
-Passing a `params` object as an option, allows you to inject runtime variables into both the HTML template and markdown files.
+You can specify placeholders in your HTML template using `{{{ variableName }}}` variables can be passed in using the `vars` option above, or using YAML [font-matter](https://jekyllrb.com/docs/front-matter/) within markdown files.
+
+```yaml
+---
+layout: post
+title: Blogging Like a Hacker
+---
+```
 
 ##### Example
 
