@@ -1,7 +1,7 @@
 'use strict';
 
 var asyncLib = require('async');
-var MemoryCache = require('../lib/memoryCache.js');
+var MemoryCache = require('../lib/memory-cache.js');
 
 describe('MemoryCache', function () {
 

@@ -1,6 +1,6 @@
 'use strict';
 
-var findUp = require('../lib/findUp.js');
+var findUp = require('../lib/find-up.js');
 
 describe('findUp', function () {
 

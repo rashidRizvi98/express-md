@@ -1,6 +1,6 @@
 'use strict';
 
-var findMatch = require('../lib/findMatch.js');
+var findMatch = require('../lib/find-match.js');
 
 describe('findMatch', function () {
 

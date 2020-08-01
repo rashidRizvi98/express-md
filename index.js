@@ -3,8 +3,8 @@ var url = require('url');
 var fs = require('fs');
 var mime = require('mime');
 
-var MemoryCache = require('./lib/memoryCache.js');
-var NoCache = require('./lib/noCache.js');
+var MemoryCache = require('./lib/memory-cache.js');
+var NoCache = require('./lib/no-cache.js');
 var memoize = require('./lib/memoize.js');
 var watch = require('./lib/watch.js');
 
@@ -48,9 +48,9 @@ function expressMd(options) {
     cache.flushAll();
 
     // load memo-ized versions of functions that we need
-    var findMatch = memoize(require('./lib/findMatch.js'), cache, 'findMatch');
+    var findMatch = memoize(require('./lib/find-match.js'), cache, 'findMatch');
     var render = memoize(require('./lib/render.js'), cache, 'render');
-    var renderError = memoize(require('./lib/renderError.js'), cache, 'renderError');
+    var renderError = memoize(require('./lib/render-error.js'), cache, 'renderError');
     var cachedReadFile = memoize(fs.readFile, cache, 'cachedReadFile');
 
     // invalidate cache on filesystem changes

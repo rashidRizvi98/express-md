@@ -1,7 +1,7 @@
 'use strict';
 
 var fs = require('fs');
-var renderError = require('../lib/renderError.js');
+var renderError = require('../lib/render-error.js');
 
 var BASE_DIR = './tests/docs';
 var EXTENSIONS = ['.md', '.mdown'];
