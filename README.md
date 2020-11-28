@@ -35,7 +35,7 @@ var mdRouter = expressMd({
   dir: __dirname + '/docs',
 
   // serve requests from root of the site
-  url: '/docs',
+  url: '/',
 
   // variables to replace {{{ varName }}} in markdown files
   vars: {
@@ -43,6 +43,7 @@ var mdRouter = expressMd({
   }
 });
 
+// add as express middleware
 app.use(mdRouter);
 
 // start the server
@@ -53,7 +54,7 @@ app.listen(port, function () {
 
 ## express-md options
 
-You can configure express-md use the following options:
+You can configure express-md using the following options:
 
 Option        | Description                                                             | Default
 :-------------|:------------------------------------------------------------------------|:-----------------------------
