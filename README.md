@@ -97,11 +97,11 @@ description: Orca Scan is a mobile barcode scanning app ...
 ---
 ```
 
-##### Example
+### Example
 
 Here is a quick example of how `express-md` resolves templates.
 
-###### Template
+#### Template
 
 ```html
 <html>
@@ -116,7 +116,7 @@ Here is a quick example of how `express-md` resolves templates.
 </html>
 ```
 
-###### Directory structure
+#### Directory structure
 
 For this example, assume the following directory structure:
 
@@ -138,7 +138,7 @@ The file `docs/api/index.md` would be served using the template file `docs/api/t
 
 The file `docs/api/v1.0/index.md` is in a directory that does not have a template file. In this case, `express-md` will search up the directory tree until it finds a template. This file would be served using the template file `docs/api/template.html`. If `express-md` is unable to find a template, it will be served as a bare-bones HTML file which is styled to match Github readme.
 
-###### URLs
+#### URLs
 
 Given the directory structure shown above, a request for `http://localhost:3000/` would return `docs/index.md` (converted to HTML, of course).
 
