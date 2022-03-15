@@ -1,0 +1,21 @@
+name: Schema Tools
+
+on:
+  pull_request:
+    branches: [master]
+    types: [synchronize, review_requested, edited, reopened, ready_for_review]
+  push:
+    branches: [master]
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-18.04
+    if: ${{ github.event.push || github.event.pull_request.draft == false }}
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+      - run: npm install
+      - run: npm test
