@@ -108,7 +108,7 @@ function expressMd(options) {
 
                     if (err) return next(err);
 
-                    var headers = { 'Content-Type': mime.lookup(ext) };
+                    var headers = { 'Content-Type': mime.getType(ext) };
                     res.writeHead(200, Object.assign({}, defaultHeaders, headers));
                     res.end(buffer);
                 });
