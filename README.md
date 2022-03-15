@@ -1,6 +1,6 @@
 # express-md
 
-[![Build Status](https://travis-ci.org/orca-scan/express-md.svg?branch=master)](https://travis-ci.org/orca-scan/express-md) [![npm](https://img.shields.io/npm/dt/express-md.svg)](https://www.npmjs.com/package/express-md)
+[![express-md](https://github.com/john-doherty/express-md/actions/workflows/ci.yml/badge.svg)](https://github.com/john-doherty/express-md/actions/workflows/ci.yml) [![npm](https://img.shields.io/npm/dt/express-md.svg)](https://www.npmjs.com/package/express-md)
 
 Express middleware to serve markdown files as HTML
 
