@@ -1,6 +1,6 @@
 {
-  "name": "express-md",
-  "version": "2.1.0",
+  "name": "express-md-upgrade",
+  "version": "1.0.0",
   "description": "Express middleware to serve markdown files as HTML",
   "homepage": "https://github.com/orca-scan/express-md",
   "keywords": [
@@ -24,7 +24,7 @@
   "dependencies": {
     "async": "~0.1.22",
     "js-yaml": "^3.14.0",
-    "marked": "^1.1.1",
+    "marked": "^4.0.10",
     "mime": "^3.0.0"
   },
   "devDependencies": {
