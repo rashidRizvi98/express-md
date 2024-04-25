@@ -24,7 +24,7 @@
   "dependencies": {
     "async": "~0.1.22",
     "js-yaml": "^3.14.0",
-    "marked": "^1.1.1",
+    "marked": "^4.0.10",
     "mime": "^3.0.0"
   },
   "devDependencies": {
